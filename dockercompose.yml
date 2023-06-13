@@ -1,0 +1,25 @@
+version: '3'
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - app
+
+  app:
+    build: ./app
+    volumes:
+      - app-data:/app/data
+    depends_on:
+      - db
+
+  db:
+    build: ./db
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  app-data:
+  db-data:
+
